@@ -1,0 +1,45 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("io.micronaut.application") version "1.5.0"
+}
+
+version = "0.1"
+group = "roomservice.dialogflow.admin"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("roomservice.dialogflow.admin.*")
+    }
+}
+
+dependencies {
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("info.picocli:picocli")
+    implementation("io.micronaut.picocli:micronaut-picocli:3.2.0")
+
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("io.micronaut:micronaut-validation")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation platform('com.google.cloud:libraries-bom:20.3.0')
+
+    implementation 'com.google.cloud:google-cloud-dialogflow'
+}
+
+
+application {
+    mainClass.set("roomservice.dialogflow.admin.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("1.8")
+    targetCompatibility = JavaVersion.toVersion("1.8")
+}
+
+
+

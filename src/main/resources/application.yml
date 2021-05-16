@@ -1,0 +1,34 @@
+micronaut:
+  application:
+    name: roomserviceDialogflowAdmin
+roomservice:
+  admin:
+    agent:
+      name: RoomService_Bot
+      displayName: roomservice_agent
+      defaultLanguageCode: "en"
+      description: "RoomService Agent"
+      enable_logging: true
+      matchMode: "MATCH_MODE_HYBRID"
+      apiVersion: "API_VERSION_V2"
+      tier: "TIER_STANDARD"
+      projectId: dialogflow-test-312112
+    intents:
+      - displayName: show-menu
+        trainingPhrases:
+          - Show me the menu
+          - I am hungry
+          - What to eat
+          - Get me room service
+          - I want room service
+        messageTexts:
+          - 'Weekday ROOMSERVICE MENU
+             Soups: Stroganoff, Tomato, Minestrone
+            Salads: Caesar salad, Waldorf salad
+            '
+      - displayName: choose-food
+        trainingPhrases:
+          - "I will have the |#{\"text\":\"food-choice\",\"userDefined\":true,\"entityType\":\"@sys.any\",\"alias\":\"chosen-food\"}"
+        messageTexts:
+          - 'Good choice. The $food-choice is very nutritious
+            '
